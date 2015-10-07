@@ -109,3 +109,10 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0095cc', endC
 	background: -moz-linear-gradient(top,  #0078a5,  #00adee);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0078a5', endColorstr='#00adee');
 }
+
+.bg{
+   background:url(../images/bk1.jpg);
+   filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+   -moz-background-size:100% 100%;
+   background-size:100% 100%;
+}

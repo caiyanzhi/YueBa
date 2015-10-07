@@ -34,6 +34,7 @@ if(method.equalsIgnoreCase("post")){
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="style/login.css">
+	<link rel="stylesheet" type="text/css" href="style/styles.css?1.0">
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?v=1.0">
 	<script type="text/javascript">
 		var loginStatus = <%=loginStatus%>;
@@ -43,7 +44,7 @@ if(method.equalsIgnoreCase("post")){
 	</script>
   </head>
   
-  <body onload="onload()">
+  <body onload="onload()" class="bg">
     		<div class="container">
     		<div class="navbar-fixed-top" style="height:40px; border-top:1px solid #CCC; padding-top:10px">
         	<font style="color:#999">欢迎来到约吧</font>
