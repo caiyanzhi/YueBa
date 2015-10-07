@@ -46,7 +46,7 @@ if(method.equalsIgnoreCase("post")){
   
   <body onload="onload()" class="bg">
     		<div class="container">
-    		<div class="navbar-fixed-top" style="height:40px; border-top:1px solid #CCC; padding-top:10px">
+    		<div class="navbar-fixed-top" style="height:40px;">
         	<font style="color:#999">欢迎来到约吧</font>
           
 			<form class="form-signin" action="./login.jsp" method="post" onsubmit="return loginOnSubmit()">
@@ -86,7 +86,7 @@ if(method.equalsIgnoreCase("post")){
 					注册
 				</button>
 			</form>
-            <div class="text-center navbar-fixed-bottom" style="height:40px; border-top:1px solid #CCC; padding-top:10px">
+            <div class="text-center navbar-fixed-bottom" style="height:40px;padding-top:10px">
         	<font class="text-center" style="color:#999">team12348005 小组作业</font>
         </div>
 		</div>
