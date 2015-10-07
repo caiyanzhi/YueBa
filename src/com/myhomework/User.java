@@ -20,6 +20,37 @@ public class User {
 	}
 	public User(){}
 	
+	public static User getUserByAccout(String sessionId,String account){
+		if(SessionIdAndUserHash.getUser(sessionId) == null){
+			return null;
+		}
+		
+		DatabaseHelper db = new DatabaseHelper();
+		String sql = "select * from user where account = '"+account+"'";
+		ResultSet resultset = db.executeQuery(sql);
+		try{
+
+			if(resultset != null && resultset.next()){
+				User user = new User();
+				user.uid = resultset.getString("uid");
+				user.account = resultset.getString("account");
+				user.username = resultset.getString("username");
+				user.describe = resultset.getString("describe_info");
+				resultset.close();
+				return user;
+			}
+			else{
+				return null;
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			db.close();
+		}
+	}
 	public boolean register(String sessionId){
 		DatabaseHelper db = new DatabaseHelper();
 		String sql ="insert into user(account,username,password,describe_info) values ('"+account+"','"+username+"','"+password+"','"+describe+"')";
