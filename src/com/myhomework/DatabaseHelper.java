@@ -30,9 +30,9 @@ public class DatabaseHelper
     private Statement stmt = null;
     public static String driveClassName = "com.mysql.jdbc.Driver";
     private PreparedStatement prepstmt = null;
-    public static String url = "jdbc:mysql://localhost:3306/team12348005"; // URL指向要访问的数据库名test
-    public static String user = "root"; // MySQL配置时的用户名
-    public static String password = "cai123280"; // MySQL配置时的密码
+    public static String url = "jdbc:mysql://202.116.76.22:3306/team12348005"; // URL指向要访问的数据库名test
+    public static String user = "user"; // MySQL配置时的用户名
+    public static String password = "123456"; // MySQL配置时的密码
     
     public DatabaseHelper()
     {

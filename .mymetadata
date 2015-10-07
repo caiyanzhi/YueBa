@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="YueBa"
+  id="myeclipse.1444112137953"
+  context-root="/YueBa"
+  j2ee-spec="5.0"
+  archive="YueBa.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -37,6 +37,9 @@ public class User {
 			e.printStackTrace();
 			return false;
 		}
+		finally{
+			db.close();
+		}
 	}
 	
 	static public User getUserBySessionId(String id){
@@ -57,6 +60,7 @@ public class User {
 				user.describe = resultset.getString("describe_info");
 
 				SessionIdAndUserHash.setUser(sessionId,user);
+				resultset.close();
 				return user;
 			}
 			else{
@@ -66,6 +70,9 @@ public class User {
 		catch(Exception e){
 			e.printStackTrace();
 			return null;
+		}
+		finally{
+			db.close();
 		}
 	}
 }
