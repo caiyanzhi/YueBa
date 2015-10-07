@@ -8,6 +8,10 @@ String method = request.getMethod();
 String loginStatus = "0";
 String loginMsg = null;
 User user = User.getUserBySessionId(session.getId());
+if(request.getParameter("loginout") != null){
+	user = null;
+	User.loginout(session.getId());
+}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -26,7 +30,11 @@ User user = User.getUserBySessionId(session.getId());
 	<link rel="stylesheet" type="text/css" href="style/styles.css?1.0">
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?v=1.0">
 	<script type="text/javascript">
-		
+	if("<%=user%>" == "null"){
+			document.location = "./login.jsp";
+			document.getElementByTags(body);
+			body.innerHTML="退出登录..";
+		}
 	</script>
   </head>
   
@@ -34,7 +42,8 @@ User user = User.getUserBySessionId(session.getId());
     	<div class="container">
 			<div class="navbar-fixed-top" style="height:40px;">
         	<font style="color:#999"><% if(user != null){%><%=user.username %>，<%} %>欢迎来到约吧</font>
-            <font style="color:#999;float:right;margin-right:20px;<% if(user == null){%>display:none<%} %>" ><p onclick=goUserPage("<%=user.account %>")>个人页面</p></font>
+        	 <font style="color:#999;float:right;margin-right:20px;<% if(user == null){%>display:none<%} %>" ><a href="./home.jsp?loginout=1">退出登录</a></font>
+            <font style="color:#999;float:right;margin-right:20px;<% if(user == null){%>display:none<%} %>" ><p onclick=goUserPage("<%=user == null ? "":user.account %>")>个人页面</p></font>
             <div class="text-center navbar-fixed-bottom" style="height:40px;padding-top:10px">
         	<font class="text-center" style="color:#999">team12348005 小组作业</font>
         	</div>

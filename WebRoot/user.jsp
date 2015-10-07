@@ -35,9 +35,15 @@ if(user != null && visituser != null && visituser.uid.equals(user.uid)){
 	
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?v=1.0">
 	<script type="text/javascript">
-		var loginStatus = <%=loginStatus%>;
-		if(loginStatus == "1"){
-			document.location = "./home.jsp";
+	
+		if("<%=user%>" == "null"){
+			document.location = "./login.jsp";
+		}
+		else{
+			var loginStatus = <%=loginStatus%>;
+			if(loginStatus == "1"){
+				document.location = "./home.jsp";
+			}
 		}
 	</script>
   </head>
@@ -46,7 +52,7 @@ if(user != null && visituser != null && visituser.uid.equals(user.uid)){
       	<div class="container">
 			<div class="navbar-fixed-top" style="height:40px;">
         	<font style="color:#999"><% if(user != null){%><%=user.username %>，<%} %>欢迎来到约吧</font>
-        	<font style="color:#999;float:right;margin-right:20px;<% if("0".equals(status) || user == null){%>display:none<%} %>" ><p onclick=editUser("1">编辑资料</p></font>
+        	<font style="color:#999;float:right;margin-right:20px;<% if("0".equals(status) || user == null){%>display:none<%} %>" ><p onclick=editUser("1")>编辑资料</p></font>
         	<font style="color:#999;float:right;margin-right:20px;<% if("0".equals(status) || user == null){%>display:none<%} %>"><p onclick=editUser("2")>修改密码</p></font> 	
  			<font style="color:#999;float:right;margin-right:20px"><p onclick=backHome()>首页</p></font>
         	</div>

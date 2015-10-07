@@ -20,6 +20,51 @@ public class User {
 	}
 	public User(){}
 	
+	public boolean modifyInfo(String u,String d){
+
+		DatabaseHelper db = new DatabaseHelper();
+		String sql = "update user set username = '"+u+"',describe_info ='"+d+"' where account = '"+account+"'";
+		System.out.println(sql);
+		try{
+			db.prepareStatement(sql);
+			int resultCode = db.executeUpdate();
+			if(resultCode > 0) {
+				this.username = u;
+				this.describe = d;
+				return true;
+			}
+			else return false;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			db.close();
+		}
+	}
+	public boolean modifyPwd(String oldPwd,String newPwd){
+
+		DatabaseHelper db = new DatabaseHelper();
+		String sql = "update user set password = '"+newPwd+"' where account = '"+account+"' and password = '"+oldPwd+"'";
+		System.out.println(sql);
+
+		try{
+			db.prepareStatement(sql);
+			int resultCode = db.executeUpdate();
+			if(resultCode > 0) {
+				return true;
+			}
+			else return false;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			db.close();
+		}
+	}
 	public static User getUserByAccout(String sessionId,String account){
 		if(SessionIdAndUserHash.getUser(sessionId) == null){
 			return null;
@@ -29,7 +74,6 @@ public class User {
 		String sql = "select * from user where account = '"+account+"'";
 		ResultSet resultset = db.executeQuery(sql);
 		try{
-
 			if(resultset != null && resultset.next()){
 				User user = new User();
 				user.uid = resultset.getString("uid");
@@ -75,6 +119,10 @@ public class User {
 	
 	static public User getUserBySessionId(String id){
 		return SessionIdAndUserHash.getUser(id);
+	}
+	
+	static public void loginout(String sessionId){
+		SessionIdAndUserHash.removeSessionId(sessionId);
 	}
 	static public User login(String sessionId,String account,String password){
 		

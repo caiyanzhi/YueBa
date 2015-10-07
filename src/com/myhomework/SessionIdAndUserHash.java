@@ -12,4 +12,8 @@ public class SessionIdAndUserHash {
 	public static void setUser(String id,User user){
 		hashMap.put(id,user);
 	}
+	
+	public static void removeSessionId(String id){
+		hashMap.remove(id);
+	}
 }
