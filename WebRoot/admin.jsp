@@ -8,10 +8,6 @@ String method = request.getMethod();
 String loginStatus = "0";
 String loginMsg = null;
 User user = User.getUserBySessionId(session.getId());
-if(request.getParameter("loginout") != null){
-	user = null;
-	User.loginout(session.getId());
-}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -30,28 +26,26 @@ if(request.getParameter("loginout") != null){
 	<link rel="stylesheet" type="text/css" href="style/styles.css?1.0">
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?v=1.0">
 	<script type="text/javascript">
-	if("<%=user%>" == "null"){
+		
+		if("<%=user%>" == "null"){
 			document.location = "./login.jsp";
-			document.getElementByTags(body);
-			body.innerHTML="退出登录..";
+		}
+		else if("<%=user.account%>" != "admin"){
+			document.location = "./home.jsp";
 		}
 	</script>
   </head>
   
-  <body onload="onload()" class="bg">
+  <body onload="onload()" class="bg" >
     	<div class="container">
 			<div class="navbar-fixed-top" style="height:40px;">
-        	<font style="color:#999"><% if(user != null){%><%=user.username %>，<%} %>欢迎来到约吧</font>
-        	 <font style="color:#999;float:right;margin-right:20px;<% if(user == null){%>display:none<%} %>" ><a href="./home.jsp?loginout=1">退出登录</a></font>
-            <font style="color:#999;float:right;margin-right:20px;<% if(user == null){%>display:none<%} %>" ><p onclick=goUserPage("<%=user == null ? "":user.account %>")>个人页面</p></font>
-            
-            <font style="color:#999;float:right;margin-right:20px;<% if(user == null || !user.account.equals("admin")){%>display:none<%} %>" ><p onclick=goManagerUser()>管理页面</p></font>
-            <div class="text-center navbar-fixed-bottom" style="height:40px;padding-top:10px">
+        	<font style="color:#999">约吧管理界面</font>
+            <div class="text-center navbar-fixed-bottom" style="height:40px; padding-top:10px">
         	<font class="text-center" style="color:#999">team12348005 小组作业</font>
         	</div>
 		</div>
     
   </body>
-  <script src="script/home.js?1.03">
+  <script src="script/home.js?1.0">
         </script>
 </html>
