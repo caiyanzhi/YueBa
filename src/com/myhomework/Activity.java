@@ -97,6 +97,38 @@ public class Activity {
 			db.close();
 		}
 	}
+	//获取用户参与的所有活动
+	public static ArrayList<Activity> getActivityOfUser(User user){
+		ArrayList<Activity> userList = new ArrayList<Activity>();
+		DatabaseHelper db = new DatabaseHelper();
+		String sql = "select DISTINCT * from (user natural join join_activity) natural join activity where uid = '"+user.uid+"'";
+		System.out.println(sql);
+		ResultSet resultset = db.executeQuery(sql);
+		try{
+			while(resultset != null && resultset.next()){
+				Activity activity = new Activity();
+				activity.uid = resultset.getString("uid");
+				activity.aid = resultset.getString("aid");
+				activity.activity_statue = resultset.getString("activity_statue");
+				activity.start_time = resultset.getString("start_time");
+				activity.create_time = resultset.getString("create_time");
+				activity.vote_stop_time = resultset.getString("vote_stop_time");
+				activity.describe_info = resultset.getString("describe_info");
+				activity.activity_name = resultset.getString("activity_name");
+				userList.add(activity);
+			}
+			resultset.close();
+			return userList;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return userList;
+		}
+		finally{
+			db.close();
+		}
+	}
+	
 	//参加活动
 	public static boolean joinActivity(User user,Activity activity){
 		DatabaseHelper db = new DatabaseHelper();

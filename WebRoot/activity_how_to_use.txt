@@ -6,7 +6,7 @@ a.modifyActivityInfo("new hahaha");//修改活动具体信息
 Activity.delectActivity(a);//删除活动
 
 Activity a = new Activity("1","跑步","1","2015-11-12 0:0:0","2015-11-11 0:0:0","2015-11-12 0:0:0","describe_info");
-a.aid = "4";
+a.aid = "14";
 ArrayList<User> userList = Activity.getJoinerOfActivity(a);//查找参加用户
 for(User u: userList) System.out.println("hello"+u.uid+" "+ u.account);
 
@@ -15,3 +15,6 @@ User user = new User();
 user.uid = "1";
 Activity.joinActivity(user,a);
 
+查询用户参加的所有活动
+ArrayList<Activity> list = Activity.getActivityOfUser(user);
+for(Activity ac:list) System.out.println(" "+ ac.describe_info);

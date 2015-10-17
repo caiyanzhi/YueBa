@@ -8,13 +8,15 @@ String method = request.getMethod();
 String loginStatus = "0";
 String loginMsg = null;
 Activity a = new Activity("1","跑步","1","2015-11-12 0:0:0","2015-11-11 0:0:0","2015-11-12 0:0:0","describe_info");
+a.aid = "14";
 Activity.insertActivity(a);
-a.aid = "4";
 a.modifyActivityInfo("new hahaha");
-Activity.delectActivity(a);
 User user = new User();
 user.uid = "1";
 Activity.joinActivity(user,a);
+
+ArrayList<Activity> list = Activity.getActivityOfUser(user);
+for(Activity ac:list) System.out.println(" "+ ac.describe_info);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
