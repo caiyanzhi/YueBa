@@ -2,6 +2,7 @@ package com.myhomework;
 
 import java.util.HashMap;
 
+//create by caiyanzhi
 public class SessionIdAndUserHash {
 	static private HashMap<String,User> hashMap = new HashMap<String,User>(); 
 	private SessionIdAndUserHash(){};

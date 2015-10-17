@@ -24,6 +24,7 @@ DBConnection 类实现了mysql连接类的封装
 */  
 
 
+//create by caiyanzhi
 public class DatabaseHelper 
 {
     private Connection conn = null;
@@ -221,8 +222,10 @@ public class DatabaseHelper
                 prepstmt.close();
                 prepstmt = null;
             }
-            conn.close();
-            conn = null;
+            if(conn != null){
+            	conn.close();
+            	conn = null;
+            }
         }catch(Exception e){
             e.printStackTrace();
         }

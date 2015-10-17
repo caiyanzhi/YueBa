@@ -1,0 +1,17 @@
+
+Activity a = new Activity("1","跑步","1","2015-11-12 0:0:0","2015-11-11 0:0:0","2015-11-12 0:0:0","describe_info");
+Activity.insertActivity(a);//创建活动
+a.aid = "4";
+a.modifyActivityInfo("new hahaha");//修改活动具体信息
+Activity.delectActivity(a);//删除活动
+
+Activity a = new Activity("1","跑步","1","2015-11-12 0:0:0","2015-11-11 0:0:0","2015-11-12 0:0:0","describe_info");
+a.aid = "4";
+ArrayList<User> userList = Activity.getJoinerOfActivity(a);//查找参加用户
+for(User u: userList) System.out.println("hello"+u.uid+" "+ u.account);
+
+参加活动
+User user = new User();
+user.uid = "1";
+Activity.joinActivity(user,a);
+

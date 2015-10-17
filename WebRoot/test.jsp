@@ -7,7 +7,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 String method = request.getMethod();
 String loginStatus = "0";
 String loginMsg = null;
-User user = User.getUserBySessionId(session.getId());
+Activity a = new Activity("1","跑步","1","2015-11-12 0:0:0","2015-11-11 0:0:0","2015-11-12 0:0:0","describe_info");
+Activity.insertActivity(a);
+a.aid = "4";
+a.modifyActivityInfo("new hahaha");
+Activity.delectActivity(a);
+User user = new User();
+user.uid = "1";
+Activity.joinActivity(user,a);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -15,7 +22,7 @@ User user = User.getUserBySessionId(session.getId());
   <head>
     <base href="<%=basePath%>">
     
-    <title>管理约吧</title>
+    <title>约吧</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -27,25 +34,12 @@ User user = User.getUserBySessionId(session.getId());
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?v=1.0">
 	<script type="text/javascript">
 		
-		if("<%=user%>" == "null"){
-			document.location = "./login.jsp";
-		}
-		else if("<%=user.account%>" != "admin"){
-			document.location = "./home.jsp";
-		}
 	</script>
   </head>
   
   <body onload="onload()" class="bg" >
-    	<div class="container">
-			<div class="navbar-fixed-top" style="height:40px;">
-        	<font style="color:#999">约吧管理界面</font>
-            <div class="text-center navbar-fixed-bottom" style="height:40px; padding-top:10px">
-        	<font class="text-center" style="color:#999">team12348005 小组作业</font>
-        	</div>
-		</div>
-    	
+    
   </body>
-  <script src="script/admin.js?1.0">
-  </script>
+  <script src="script/home.js?1.0">
+        </script>
 </html>
