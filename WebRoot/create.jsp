@@ -1,63 +1,56 @@
-<%@ page contentType="text/html; charset=gb2312" language="java" import="java.sql.*" errorPage="" %>
+<%@ page language="java" import="java.util.*" import="com.myhomework.*" pageEncoding="utf-8"%>
 <%
-  //request.setCharacterEncoding("utf-8");
-  //User user = User.getUserBySessionId(session.getId());
-  String msg = "";
-  
-  if(request.getMethod().equalsIgnoreCase("post") ){
-    String name = request.getParameter("name");
-    String date = request.getParameter("date");
-    String time = request.getParameter("time");
-    String location = request.getParameter("location");
+request.setCharacterEncoding("utf-8");
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+String method = request.getMethod();
+int modifyStatus = 0;   // 0: before 1: success -1: failed
+User user = User.getUserBySessionId(session.getId());
+
+if (method.equalsIgnoreCase("post")) {
+	String uid = request.getParameter("uid");
+	String create_time = request.getParameter("create_time");
+	String start_time = request.getParameter("start_time");
+	String vote_stop_time = request.getParameter("vote_stop_time");
+	String activity_name = request.getParameter("activity_name");
+	String describe_info = request.getParameter("describe_info");
 	
-	/*
-	  数据库操作...
-	  if(操作成功)
-	    response.sendRedirect("home.jsp");
-	  else
-	    msg="操作失败！";
-	*/
-  }
+	if (user != null && uid != null && user.uid == uid && create_time != null &&
+		start_time != null && vote_stop_time != null && activity_name != null && 
+		describe_info != null) {
+		Activity activity = new Activity(user.uid, activity_name, "1", 
+			start_time, create_time, vote_stop_time, describe_info);
+		if (Activity.insertActivity(activity)) {
+			modifyStatus = 1;
+		} else {
+			modifyStatus = -1;
+		}
+	} else {
+		modifyStatus = -1;
+	}
+}
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-    <title>创建活动</title>
+    <base href="<%=basePath%>">
+    
+    <title>Create Activity</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="Create Activity">
 	
-	<script language="javascript">
-	  function check()
-	  {
-	    var name = document.getElementById("name").value;
-		var date = document.getElementById("date").value;
-		var time = document.getElementById("time").value;
-		var location = document.getElementById("location").value;
-	    
-		if(name == "" || date == "" || time == "" || location == "")
-		{
-		  alert("请将信息填写完整！");
-		  return false;
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?v=1.0">
+	<script type="text/javascript">
+		if("<%=user%>" == "null"){
+			document.location = "./login.jsp";
 		}
-		
-		return true;
-	  }
 	</script>
   </head>
-
-  <body>
-    <form action="create.jsp" method="post" onsubmit="return check()">
-	  活动名称：<input type="text" id="name" />
-	  <br>
-	  活动日期：<input type="text" id="date" />（格式：2015/10/07）
-	  <br>
-	  活动时间：<input type="text" id="time" />（格式：16:00-18:00）
-	  <br>
-	  活动地点：<input type="text" id="location" />
-	  <br><br>
-	  <input type="submit" value="创建活动" />
-	</form>
-	
-	<font color="#FF0000"><%=msg%></font>
+  
+  <body onload="onload()" class="bg">
   </body>
-</html>
