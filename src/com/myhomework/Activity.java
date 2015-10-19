@@ -149,6 +149,23 @@ public class Activity {
 			db.close();
 		}
 	}
+
+	// 退出活动
+	public static boolean quitActivity(User user, Activity activity) {
+		DatabaseHelper db = new DatabaseHelper();
+		String sql = "delete from join_activity where uid = '"+user.uid+"'"	+ "aid= '" + activity.aid +"'";
+		try {
+			db.prepareStatement(sql);
+			int resultCode = db.executeUpdate();
+			if (resultCode > 0) return true;
+			else return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			db.close();
+		}
+	}
 	
 	public static boolean delectActivity(Activity activity){
 		DatabaseHelper db = new DatabaseHelper();
