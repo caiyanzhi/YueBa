@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="admin.jsp" local="130892638799430903" remote="130892637330000000" testing="0" />
+<file name="admin.jsp" local="130897932366390231" remote="130897928730000000" testing="0" />
 <file name="editUser.jsp" local="130892638799440906" remote="130892637330000000" testing="0" />
-<file name="home.jsp" local="130892638799450916" remote="130892637330000000" testing="130892637330000000" />
+<file name="home.jsp" local="130898775057959941" remote="130898774840000000" testing="130898770540000000" />
 <file name="index.jsp" local="130892638799490949" remote="130892637330000000" testing="0" />
-<file name="login.jsp" local="130892638799500953" remote="130892637330000000" testing="0" />
-<file name="register.jsp" local="130892638799510974" remote="130892637330000000" testing="0" />
+<file name="login.jsp" local="130898730610000000" remote="130898727590000000" testing="130898727590000000" />
+<file name="register.jsp" local="130898812963065991" remote="130898809200000000" testing="130898727590000000" />
 <file name="user.jsp" local="130892638799591010" remote="130892637330000000" testing="0" />
 <file name="Activity.jsp" local="130892746999258299" remote="130892744700000000" testing="130892744700000000" />
-<file name="create.jsp" local="130892747549140392" remote="130892744700000000" testing="0" />
-<file name="join.jsp" local="130892747645573813" remote="130892744700000000" testing="0" />
+<file name="create.jsp" local="130899137315847009" remote="130899135610000000" testing="130898804900000000" />
+<file name="join.jsp" local="130899137213039820" remote="130899135610000000" testing="130898843560000000" />
+<file name="activity.jsp" local="130898872835924242" remote="130898869330000000" testing="130898869330000000" />
+<file name="activity_how_to_use.txt" local="130897932366350300" remote="130897928730000000" testing="0" />
+<file name="cancel.jsp" local="130899136964271580" remote="130899135610000000" testing="0" />
+<file name="quit.jsp" local="130899136893021250" remote="130899135610000000" testing="0" />
+<file name="test.jsp" local="130897932366630288" remote="130897928730000000" testing="0" />
 </dwsync>

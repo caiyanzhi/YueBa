@@ -25,7 +25,6 @@ if(method.equalsIgnoreCase("post")){
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>约吧</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -44,12 +43,12 @@ if(method.equalsIgnoreCase("post")){
 	</script>
   </head>
   
-  <body onload="onload()" class="bg">
+  <body onLoad="onload()" class="bg">
     		<div class="container">
     		<div class="navbar-fixed-top" style="height:40px;">
         	<font style="color:#999">欢迎来到约吧</font>
           
-			<form class="form-signin" action="./login.jsp" method="post" onsubmit="return loginOnSubmit()">
+			<form class="form-signin" action="./login.jsp" method="post" onSubmit="return loginOnSubmit()">
 				<h2 class="form-signin-heading text-center">
 					登录到约吧，一起参加活动！
 				</h2>
@@ -80,7 +79,7 @@ if(method.equalsIgnoreCase("post")){
 					登录
 				</button>
 			</form>
-			<form class="form-signin" action="./register.jsp">
+			<form class="form-signin" action="register.jsp">
 				<button class="btn btn-lg btn-block btn btn-danger" type="submit"
 					id="register_btn">
 					注册

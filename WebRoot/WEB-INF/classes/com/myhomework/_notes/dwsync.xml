@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="DatabaseHelper.java" local="130892638799621027" remote="130892637330000000" testing="0" />
-<file name="SessionIdAndUserHash.java" local="130892638799631030" remote="130892637330000000" testing="0" />
-<file name="User.java" local="130892638799651050" remote="130892637330000000" testing="0" />
+<file name="Activity.class" local="130897932365870197" remote="130897928730000000" testing="0" />
+<file name="DatabaseHelper.class" local="130897932365870197" remote="130897928730000000" testing="0" />
+<file name="SessionIdAndUserHash.class" local="130897932365910200" remote="130897928730000000" testing="0" />
+<file name="User.class" local="130897932365950221" remote="130897928730000000" testing="0" />
 </dwsync>

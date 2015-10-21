@@ -38,7 +38,7 @@ if(request.getParameter("loginout") != null){
 	</script>
   </head>
   
-  <body onload="onload()" class="bg">
+  <body onLoad="onload()" class="bg">
     	<div class="container">
 			<div class="navbar-fixed-top" style="height:40px;">
         	<font style="color:#999"><% if(user != null){%><%=user.username %>，<%} %>欢迎来到约吧</font>

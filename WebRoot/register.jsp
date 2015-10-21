@@ -50,7 +50,7 @@ if(method.equalsIgnoreCase("post")){
   			<div class="navbar-fixed-top" style="height:40px">
         	<font style="color:#999">欢迎来到约吧</font>
     		<div class="container">
-			<form class="form-signin" action="./register.jsp" method="post" onsubmit="return regSubmit()">
+			<form class="form-signin" action="./register.jsp" method="post" onSubmit="return regSubmit()">
 				<h2 class="form-signin-heading text-center"> 
 					注册约吧账号，一起参加活动！ 
 				</h2>
