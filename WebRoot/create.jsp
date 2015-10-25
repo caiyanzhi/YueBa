@@ -14,17 +14,17 @@ User user = User.getUserBySessionId(session.getId());
 
 String msg = "";
 
-if (method.equalsIgnoreCase("post")) {
-	String uid = request.getParameter("uid");
-	String create_time = request.getParameter("create_time");
+if (method.equalsIgnoreCase("post") && user != null) {
+	String uid = user.uid;
+	String create_time = time;
 	String start_time = request.getParameter("start_time");
 	String vote_stop_time = request.getParameter("vote_stop_time");
 	String activity_name = request.getParameter("activity_name");
 	String describe_info = request.getParameter("describe_info");
-	
-	if (user != null && uid != null && user.uid == uid && create_time != null &&
-		start_time != null && vote_stop_time != null && activity_name != null && 
-		describe_info != null) {
+	System.out.println(create_time);
+	if (uid != null && !"".equals(start_time) && 
+		!"".equals(vote_stop_time) && !"".equals(activity_name)&&
+		!"".equals(describe_info)) {
 		Activity activity = new Activity(user.uid, activity_name, "1", 
 			start_time, create_time, vote_stop_time, describe_info);
 		if (Activity.insertActivity(activity)) {
@@ -53,6 +53,7 @@ if (method.equalsIgnoreCase("post")) {
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="Create Activity">
 	
+	<link rel="stylesheet" type="text/css" href="style/styles.css?1.0">
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?v=1.0">
 	<script type="text/javascript">
 		if("<%=user%>" == "null"){
@@ -80,40 +81,33 @@ if (method.equalsIgnoreCase("post")) {
   <body onLoad="onload()" class="bg">
     <form class="form-signin" action="create.jsp" method="post" onSubmit="return check()">
 	  <h2 class="form-signin-heading text-center"> 
-        创建约吧活动，让大家和你一起享受生活！
+        创建约吧活动，让大家和你一起享受约起来！
 	  </h2>
 	  
 	  <label for="inputEmail" class="sr-only">
 	    名称
 	  </label>
-	  <input type="text" id="activity_name" class="form-control"
+	  <input type="text" id="activity_name" class="form-control" style="margin-top:10px"
 					name="activity_name" placeholder="活动名称">
 	  
 	  <label for="inputEmail" class="sr-only">
 	    活动信息
 	  </label>
-	  <input type="text" id="describe_info" class="form-control"
-					name="describe_info" placeholder="活动信息">
+	  <textarea type="text" id="describe_info" class="form-control" style="margin-top:10px"
+					name="describe_info" placeholder="活动介绍"></textarea>
 	  
 	  <label for="inputEmail" class="sr-only">
 	    开始时间
 	  </label>
-	  <input type="text" id="start_time" class="form-control"
+	  <input type="text" id="start_time" class="form-control" style="margin-top:10px"
 					name="start_time" placeholder="开始时间">
 					
 	  <label for="inputEmail" class="sr-only">
-	    结束时间
+	    报名结束时间
 	  </label>
-	  <input type="text" id="vote_stop_time" class="form-control"
-					name="vote_stop_time" placeholder="结束时间">
-	  
-	  <label for="inputEmail" class="sr-only">
-	    创建时间
-	  </label>
-	  <input type="text" id="create_time" class="form-control"
-					name="create_time" readonly="true" placeholder="创建时间：<%=time%>">
-					
-	  <button class="btn btn-lg btn-primary btn-block" type="submit"
+	  <input type="text" id="vote_stop_time" class="form-control" style="margin-top:10px"
+					name="vote_stop_time" placeholder="报名结束时间">			
+	  <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px"
 					 name="finish" id="finish">
 	    完成
 	  </button>

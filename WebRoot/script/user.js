@@ -39,3 +39,11 @@ function checkNewInfo(){
 		return false;
 	}
 }
+
+function createActivity(){
+	document.location = "./create.jsp";
+}
+
+function viewActivity(aid){
+	document.location="./activity.jsp?aid="+aid;
+}

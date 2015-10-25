@@ -7,13 +7,13 @@ import java.util.ArrayList;
 public class Activity {
 	public String aid = "";
 	public String uid = "";
-	public String activity_statue = "";
+	public String activity_statue = ""; // 1 代表正在报名中 2表示已经截止报名 3表示活动已经举办完毕 4表示活动已经被取消
 	public String start_time = "";
 	public String create_time = "";
 	public String vote_stop_time = "";
 	public String describe_info = "";
 	public String activity_name = "";
-
+	
 	public Activity(String uid,String activityname,String activity_statue,String start_time, String create_time, String vote_stop_time,
 			String describe_info) {
 		super();
@@ -26,10 +26,32 @@ public class Activity {
 		this.describe_info = describe_info;
 	}
 	
+	public static boolean isJoinActivity(String uid,String aid){
+		DatabaseHelper db = new DatabaseHelper();
+		String sql ="select * from join_activity where uid = '"+uid+"' and aid = '"+aid+"'";
+		System.out.println(sql);
+		ResultSet resultset = db.executeQuery(sql);
+		try{
+			if(resultset != null && resultset.next()){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally{
+			db.close();
+		}
+		
+	}
 	//创建活动
 	public static boolean insertActivity(Activity activity){
 		DatabaseHelper db = new DatabaseHelper();
 		String sql ="insert into activity(uid,activity_name,activity_statue,start_time,create_time,vote_stop_time,describe_info) values ('"+activity.uid+"','"+activity.activity_name+"','"+activity.activity_statue+"','"+activity.start_time+"','"+activity.create_time+"','"+activity.vote_stop_time+"','"+activity.describe_info+"')";
+		System.out.println(sql);
 		try{
 			db.prepareStatement(sql);
 			int resultCode = db.executeUpdate();
@@ -70,6 +92,40 @@ public class Activity {
 		}
 	}
 	
+	//查询活动活动
+	public static Activity getActivityByAid(String aid){
+		DatabaseHelper db = new DatabaseHelper();
+		String sql = "select DISTINCT * from activity where aid = '"+aid+"'";
+		System.out.println(sql);
+		ResultSet resultset = db.executeQuery(sql);
+		try{
+			while(resultset != null && resultset.next()){
+				Activity activity = new Activity();
+				activity.uid = resultset.getString("uid");
+				activity.aid = resultset.getString("aid");
+				activity.activity_statue = resultset.getString("activity_statue");
+				activity.start_time = resultset.getString("start_time");
+				activity.create_time = resultset.getString("create_time");
+				activity.vote_stop_time = resultset.getString("vote_stop_time");
+				activity.describe_info = resultset.getString("describe_info");
+				activity.activity_name = resultset.getString("activity_name");
+				resultset.close();
+				return activity;
+			}
+
+			resultset.close();
+			return null;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			if(resultset != null) 
+			db.close();
+		}
+	}
+	
 	//查询所有参加活动的用户
 	public static ArrayList<User> getJoinerOfActivity(Activity activity){
 		ArrayList<User> userList = new ArrayList<User>();
@@ -86,6 +142,7 @@ public class Activity {
 				user.describe = resultset.getString("describe_info");
 				userList.add(user);
 			}
+			if(resultset!=null)
 			resultset.close();
 			return userList;
 		}
@@ -97,6 +154,40 @@ public class Activity {
 			db.close();
 		}
 	}
+	
+	//获取所有活动
+	public static ArrayList<Activity> getAllActivity(int pgno,int pgcnt){
+		ArrayList<Activity> activityList = new ArrayList<Activity>();
+		DatabaseHelper db = new DatabaseHelper();
+		String sql = "select * from activity order by create_time desc limit " + pgno*pgcnt + "," + pgcnt;;
+		System.out.println(sql);
+		ResultSet resultset = db.executeQuery(sql);
+		try{
+			while(resultset != null && resultset.next()){
+				Activity activity = new Activity();
+				activity.uid = resultset.getString("uid");
+				activity.aid = resultset.getString("aid");
+				activity.activity_statue = resultset.getString("activity_statue");
+				activity.start_time = resultset.getString("start_time");
+				activity.create_time = resultset.getString("create_time");
+				activity.vote_stop_time = resultset.getString("vote_stop_time");
+				activity.describe_info = resultset.getString("describe_info");
+				activity.activity_name = resultset.getString("activity_name");
+				activityList.add(activity);
+			}
+			if(resultset != null)
+				resultset.close();
+			return activityList;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return activityList;
+		}
+		finally{
+			db.close();
+		}
+	}
+	
 	//获取用户参与的所有活动
 	public static ArrayList<Activity> getActivityOfUser(User user){
 		ArrayList<Activity> userList = new ArrayList<Activity>();
@@ -117,7 +208,9 @@ public class Activity {
 				activity.activity_name = resultset.getString("activity_name");
 				userList.add(activity);
 			}
-			resultset.close();
+
+			if(resultset != null)
+				resultset.close();
 			return userList;
 		}
 		catch(Exception e){
@@ -133,6 +226,7 @@ public class Activity {
 	public static boolean joinActivity(User user,Activity activity){
 		DatabaseHelper db = new DatabaseHelper();
 		String sql ="insert into join_activity(uid,aid) values ('"+user.uid+"','"+activity.aid+"')";
+		System.out.println(sql);
 		try{
 			db.prepareStatement(sql);
 			int resultCode = db.executeUpdate();
@@ -153,7 +247,8 @@ public class Activity {
 	// 退出活动
 	public static boolean quitActivity(User user, Activity activity) {
 		DatabaseHelper db = new DatabaseHelper();
-		String sql = "delete from join_activity where uid = '"+user.uid+"'"	+ "aid= '" + activity.aid +"'";
+		String sql = "delete from join_activity where uid = '"+user.uid+"'"	+ "and aid= '" + activity.aid +"'";
+		System.out.println(sql);
 		try {
 			db.prepareStatement(sql);
 			int resultCode = db.executeUpdate();
@@ -167,10 +262,11 @@ public class Activity {
 		}
 	}
 	
-	public static boolean delectActivity(Activity activity){
+	//取消该活动
+	public static boolean delectActivity(User user,Activity activity){
 		DatabaseHelper db = new DatabaseHelper();
-		String sql = "delete from activity where aid = '"+activity.aid+"'";
-
+		String sql = "update activity set activity_status = '4' where aid = '"+activity.uid+"' and uid = '"+user.uid+"'";
+		
 		try{
 			db.prepareStatement(sql);
 			int resultCode = db.executeUpdate();
@@ -187,6 +283,7 @@ public class Activity {
 			db.close();
 		}
 	}
+	
 	public Activity(){}
 	
 	public String getAid() {

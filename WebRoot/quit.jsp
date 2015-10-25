@@ -88,7 +88,7 @@ if (method.equalsIgnoreCase("post")) {
         想清楚了吗？难道你就不会感到留恋？
 	  </h2>
 	  
-	  <form  class="form-signin" action="quit.jsp?uid=<%user.uid%>" method="post" onSubmit="return check()">
+	  <form  class="form-signin" action="quit.jsp?uid=<%=user.uid%>" method="post" onSubmit="return check()">
 	    <table align="center" style="margin-top:50px" border="1" cellpadding="1" cellspacing="1">
 	      <tr align="center">
 		    <td>活动名称</td> <td>活动信息</td> <td>开始时间</td> <td>选择退出</td>

@@ -75,7 +75,7 @@ try {
      }
  } catch (Exception e) {
      e.printStackTrace();
-   }
+  }
 %>
 
 <html>
@@ -90,6 +90,7 @@ try {
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="Create Activity">
 	
+	<link rel="stylesheet" type="text/css" href="style/styles.css?1.0">
 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?v=1.0">
 	<script type="text/javascript">
 		if("<%=user%>" == "null"){
@@ -126,13 +127,13 @@ try {
         心动不如行动，赶快来参加活动吧！
 	  </h2>
 	  
-	  <form  class="form-signin" action="join.jsp?uid=<%user.uid%>" method="post" onSubmit="return check()">
+	  <form  class="form-signin" action="join.jsp?uid=<%=user.uid%>" method="post" onSubmit="return check()">
 	  <table align="center" style="margin-top:50px" border="1" cellpadding="1" cellspacing="1">
 	    <tr align="center">
-		  <td>活动名称</td> <td>活动信息</td> <td>活动开始时间</td> <td>报名截止时间</td> <td>选择参加</td>
+		  <td>活动名称</td> <td>活动信息</td> <td>活动开始时间</td> <td>报名截止时间</td>
 		</tr>
 		
-	    <% while(rs.next() )
+	    <% while(rs!=null&& rs.next())
 	       {
 	    %>
 		
